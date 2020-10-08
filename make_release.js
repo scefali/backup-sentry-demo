@@ -4,7 +4,7 @@ main();
 
 async function main() {
   const cli = new SentryCli().releases;
-  const version = "10.8.2";
+  const version = "10.8.3";
   const prefix = "static/js";
 
   const options = { projects: ["test-sentry-cli-js", "test-steve"] };
