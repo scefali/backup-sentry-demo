@@ -4,10 +4,11 @@ main();
 
 async function main() {
   const cli = new SentryCli().releases;
-  const version = "10.8.5";
+  const version = "10.8.6";
   const prefix = "static/js";
 
-  const options = { projects: ["test-sentry-cli-js", "test-steve"] };
+  // const options = { projects: ["test-sentry-cli-js", "test-steve"] };
+  const options = { projects: ["test-sentry-cli-js"] };
   // const options = undefined;
   await cli.new(version, options);
   const setCommitOptions = { ...options, auto: true };
