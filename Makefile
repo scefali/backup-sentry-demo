@@ -1,6 +1,6 @@
 SENTRY_URL=https://scefali.ngrok.io
 SENTRY_ORG=sentry
-SENTRY_PROJECT=react
+SENTRY_PROJECT=gitlab
 
 # SENTRY_URL=https://sentry.io
 # SENTRY_ORG=sentry-test
