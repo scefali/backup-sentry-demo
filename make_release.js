@@ -7,16 +7,22 @@ async function main() {
   const version = "10.8.7";
   const prefix = "static/js";
 
-  const options = { projects: ["test-sentry-cli-js", "test-steve"] };
+  const projects = ["test-sentry-cli-js", "test-steve"];
+  const options = { projects };
   // const options = { projects: ["test-sentry-cli-js"] };
   await cli.new(version, options);
-  const setCommitOptions = { ...options, auto: true };
+  const setCommitOptions = { auto: true };
   await cli.setCommits(version, setCommitOptions);
-  const sourceMapOptions = {
-    // ...options,
-    urlPrefix: `~/${prefix}`,
-    validate: true,
-    include: [`build/${prefix}`],
-  };
-  await cli.uploadSourceMaps(version, sourceMapOptions);
+
+  await Promise.all(
+    projects.map((project) => {
+      const sourceMapOptions = {
+        projects: [project],
+        urlPrefix: `~/${prefix}`,
+        validate: true,
+        include: [`build/${prefix}`],
+      };
+      return cli.uploadSourceMaps(version, sourceMapOptions);
+    })
+  );
 }
