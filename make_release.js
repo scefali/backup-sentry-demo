@@ -11,15 +11,23 @@ async function main() {
   await cli.new(version, { projects });
   await cli.setCommits(version, { auto: true });
 
-  await Promise.all(
-    projects.map((project) => {
-      const sourceMapOptions = {
-        projects: [project],
-        urlPrefix: `~/${prefix}`,
-        validate: true,
-        include: [`build/${prefix}`],
-      };
-      return cli.uploadSourceMaps(version, sourceMapOptions);
-    })
-  );
+  const sourceMapOptions = {
+    projects,
+    urlPrefix: `~/${prefix}`,
+    validate: true,
+    include: [`build/${prefix}`],
+  };
+  await cli.uploadSourceMaps(version, sourceMapOptions);
+
+  // await Promise.all(
+  //   projects.map((project) => {
+  //     const sourceMapOptions = {
+  //       projects: [project],
+  //       urlPrefix: `~/${prefix}`,
+  //       validate: true,
+  //       include: [`build/${prefix}`],
+  //     };
+  //     return cli.uploadSourceMaps(version, sourceMapOptions);
+  //   })
+  // );
 }
